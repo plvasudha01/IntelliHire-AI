@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ATS Results - IntelliHire-AI</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fb;
+            color: #172033;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 35px 20px 60px;
+        }
+
+        /* HEADER */
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #6b7280;
+            font-size: 16px;
+        }
+
+        /* CARDS */
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e5e7eb;
+        }
+
+        .card h2 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-size: 21px;
+        }
+
+        .description {
+            color: #6b7280;
+            margin-top: 0;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        /* SCORE */
+
+        .score-card {
+            text-align: center;
+            padding: 35px 20px;
+        }
+
+        .score-label {
+            color: #6b7280;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            margin: 0;
+        }
+
+        .score {
+            font-size: 64px;
+            font-weight: 800;
+            margin: 12px 0 5px;
+            color: #2563eb;
+        }
+
+        .score-status {
+            color: #6b7280;
+            font-size: 15px;
+        }
+
+        /* SKILL GRID */
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill {
+            display: inline-flex;
+            align-items: center;
+            padding: 9px 14px;
+            border-radius: 999px;
+            background: #dcfce7;
+            color: #166534;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .required {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .preferred {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .missing {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        /* BREAKDOWN */
+
+        .metric {
+            margin: 22px 0;
+        }
+
+        .metric:last-child {
+            margin-bottom: 0;
+        }
+
+        .metric-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        .metric-header strong {
+            font-size: 15px;
+        }
+
+        .bar {
+            height: 12px;
+            background: #e5e7eb;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .fill {
+            height: 100%;
+            background: #2563eb;
+            border-radius: 20px;
+        }
+
+        /* RECOMMENDATIONS */
+
+        .recommendations {
+            padding-left: 22px;
+            margin-bottom: 0;
+        }
+
+        .recommendations li {
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .recommendations li:last-child {
+            margin-bottom: 0;
+        }
+
+        /* CANDIDATE */
+
+        .candidate-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .candidate-item {
+            background: #f8fafc;
+            padding: 16px;
+            border-radius: 10px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .candidate-label {
+            color: #6b7280;
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        .candidate-value {
+            font-weight: 600;
+            word-break: break-word;
+        }
+
+        /* BUTTON */
+
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .back {
+            display: inline-block;
+            padding: 13px 22px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 9px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .back:hover {
+            background: #1d4ed8;
+        }
+
+        /* FOOTER */
+
+        .footer {
+            text-align: center;
+            color: #9ca3af;
+            font-size: 13px;
+            margin-top: 30px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            .container {
+                padding: 20px 14px 40px;
+            }
+
+            .logo {
+                font-size: 27px;
+            }
+
+            .score {
+                font-size: 50px;
+            }
+
+            .candidate-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <div class="logo">
+            IntelliHire-AI
+        </div>
+
+        <div class="subtitle">
+            AI-Powered Resume Screening & ATS Analysis
+        </div>
+
+    </div>
+
+
+    <!-- ATS SCORE -->
+
+    <div class="card score-card">
+
+        <p class="score-label">
+            ATS SCORE
+        </p>
+
+        <div class="score">
+            {{ result.score }}/100
+        </div>
+
+        <div class="score-status">
+            Resume compatibility with the provided job description
+        </div>
+
+    </div>
+
+
+    <!-- REQUIRED SKILLS -->
+
+    <div class="card">
+
+        <h2>🔴 Required Skills</h2>
+
+        <p class="description">
+            Skills identified as important or required by the job description.
+        </p>
+
+        <div class="skills">
+
+            {% for skill in result.get("required_skills", []) %}
+
+                <span class="skill required">
+                    {{ skill }}
+                </span>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+
+    <!-- PREFERRED SKILLS -->
+
+    <div class="card">
+
+        <h2>🟡 Preferred Skills</h2>
+
+        <p class="description">
+            Skills that appear to be preferred or additional qualifications.
+        </p>
+
+        <div class="skills">
+
+            {% for skill in result.get("preferred_skills", []) %}
+
+                <span class="skill preferred">
+                    {{ skill }}
+                </span>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+
+    <!-- MATCHED SKILLS -->
+
+    <div class="card">
+
+        <h2>✓ Matched Skills</h2>
+
+        <p class="description">
+            Skills detected in the resume that match the job description.
+        </p>
+
+        <div class="skills">
+
+            {% for skill in result.get("matched_skills", []) %}
+
+                <span class="skill">
+                    ✓ {{ skill }}
+                </span>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+
+    <!-- MISSING SKILLS -->
+
+    <div class="card">
+
+        <h2>✗ Missing Skills</h2>
+
+        <p class="description">
+            Skills mentioned in the job description but not detected in the resume.
+        </p>
+
+        <div class="skills">
+
+            {% for skill in result.get("missing_skills", []) %}
+
+                <span class="skill missing">
+                    ✗ {{ skill }}
+                </span>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+
+    <!-- SCORE BREAKDOWN -->
+
+    <div class="card">
+
+        <h2>📊 Score Breakdown</h2>
+
+        <!-- Skill Match -->
+
+        <div class="metric">
+
+            <div class="metric-header">
+
+                <span>Skill Match</span>
+
+                <strong>
+                    {{ result.skill_match }}%
+                </strong>
+
+            </div>
+
+            <div class="bar">
+
+                <div
+                    class="fill"
+                    style="width: {{ result.skill_match }}%;">
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Keyword Match -->
+
+        <div class="metric">
+
+            <div class="metric-header">
+
+                <span>Keyword Match</span>
+
+                <strong>
+                    {{ result.keyword_match }}%
+                </strong>
+
+            </div>
+
+            <div class="bar">
+
+                <div
+                    class="fill"
+                    style="width: {{ result.keyword_match }}%;">
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Project Relevance -->
+
+        <div class="metric">
+
+            <div class="metric-header">
+
+                <span>Project Relevance</span>
+
+                <strong>
+                    {{ result.project_relevance }}%
+                </strong>
+
+            </div>
+
+            <div class="bar">
+
+                <div
+                    class="fill"
+                    style="width: {{ result.project_relevance }}%;">
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Education Match -->
+
+        <div class="metric">
+
+            <div class="metric-header">
+
+                <span>Education Match</span>
+
+                <strong>
+                    {{ result.education_match }}%
+                </strong>
+
+            </div>
+
+            <div class="bar">
+
+                <div
+                    class="fill"
+                    style="width: {{ result.education_match }}%;">
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- RECOMMENDATIONS -->
+
+    <div class="card">
+
+        <h2>💡 ATS Recommendations</h2>
+
+        <p class="description">
+            Suggestions to improve resume compatibility with this job.
+        </p>
+
+        <ul class="recommendations">
+
+            {% for recommendation in recommendations %}
+
+                <li>
+                    {{ recommendation }}
+                </li>
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+
+    <!-- CANDIDATE -->
+
+    <div class="card">
+
+        <h2>👤 Candidate</h2>
+
+        <div class="candidate-grid">
+
+            <div class="candidate-item">
+
+                <div class="candidate-label">
+                    Name
+                </div>
+
+                <div class="candidate-value">
+                    {{ resume.name }}
+                </div>
+
+            </div>
+
+
+            <div class="candidate-item">
+
+                <div class="candidate-label">
+                    Email
+                </div>
+
+                <div class="candidate-value">
+                    {{ resume.email }}
+                </div>
+
+            </div>
+
+
+            <div class="candidate-item">
+
+                <div class="candidate-label">
+                    CGPA
+                </div>
+
+                <div class="candidate-value">
+                    {{ resume.cgpa }}
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- BUTTON -->
+
+    <div class="button-container">
+
+        <a href="/" class="back">
+            ← Analyze Another Resume
+        </a>
+
+    </div>
+
+
+    <div class="footer">
+        IntelliHire-AI • Automated Resume Screening System
+    </div>
+
+
+</div>
+
+</body>
+
+</html>

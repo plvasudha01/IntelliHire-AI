@@ -1,0 +1,46 @@
+SOFTWARE ENGINEER – PYTHON
+
+Job Description:
+
+We are looking for a motivated Software Engineer to join our development team. The candidate will be responsible for designing, developing, testing, and maintaining software applications.
+
+Required Skills:
+- Strong programming skills in Python
+- Good knowledge of Data Structures and Algorithms
+- Strong understanding of SQL and relational databases
+- Experience with Git and GitHub
+- Knowledge of Object-Oriented Programming
+- Understanding of software development and debugging
+- Good problem-solving and analytical skills
+- Knowledge of REST APIs
+
+Preferred Skills:
+- Experience with Flask or Django
+- Knowledge of Machine Learning and Data Science
+- Familiarity with Pandas and NumPy
+- Knowledge of cloud platforms such as AWS
+- Basic understanding of Docker
+- Experience working with MongoDB
+
+Education:
+
+Bachelor's degree in Computer Science, Information Technology, Artificial Intelligence, Data Science, or a related field.
+
+Responsibilities:
+
+- Develop and maintain Python-based applications
+- Write clean, reusable, and efficient code
+- Work with databases and SQL queries
+- Design and consume REST APIs
+- Use Git and GitHub for version control
+- Debug and troubleshoot software issues
+- Collaborate with team members to develop new features
+- Participate in code reviews and testing
+- Analyze technical requirements and implement effective solutions
+
+Qualifications:
+
+- Strong communication and teamwork skills
+- Ability to learn new technologies quickly
+- Good analytical and problem-solving abilities
+- Ability to work effectively in a team environment
