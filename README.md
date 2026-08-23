@@ -56,7 +56,7 @@ pip install -r requirements.txt
 ### 1. Start the application
 
 ```bash
-python app/app.py
+python -m app.app
 ```
 
 ### 2. Open the web application
