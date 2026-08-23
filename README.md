@@ -105,7 +105,19 @@ IntelliHire-AI/
 ├── .gitignore
 └── README.md
 ```
+## 📸 Screenshots
 
+### Resume Upload
+![IntelliHire Resume Upload](screenshots/IntelliHire1.png)
+
+### Job Description & Analysis
+![IntelliHire Job Analysis](screenshots/IntelliHire2.png)
+
+### ATS Score & Skill Analysis
+![IntelliHire ATS Results](screenshots/IntelliHire3.png)
+
+### Detailed Score Breakdown
+![IntelliHire Score Breakdown](screenshots/IntelliHire4.png)
 ## License
 
 This project is licensed under the MIT License.
