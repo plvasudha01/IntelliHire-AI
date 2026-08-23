@@ -12,15 +12,9 @@ def normalize_text(text: str) -> str:
         return ""
 
     text = str(text).lower()
-
-    # Normalize dash characters
     text = text.replace("–", "-")
     text = text.replace("—", "-")
-
-    # Normalize common PDF extraction problems
     text = text.replace("\u00a0", " ")
-
-    # Normalize whitespace
     text = re.sub(r"\s+", " ", text)
 
     return text.strip()
@@ -32,10 +26,7 @@ def normalize_text(text: str) -> str:
 
 SKILL_PATTERNS = {
 
-    # Programming
-    "Python": [
-        r"\bpython\b"
-    ],
+    "Python": [r"\bpython\b"],
 
     "C": [
         r"(?<![a-z])c(?![a-z+#])"
@@ -45,34 +36,21 @@ SKILL_PATTERNS = {
         r"(?<![a-z])c\+\+(?![a-z])"
     ],
 
-    "Java": [
-        r"\bjava\b"
-    ],
+    "Java": [r"\bjava\b"],
 
-    "JavaScript": [
-        r"\bjavascript\b"
-    ],
+    "JavaScript": [r"\bjavascript\b"],
 
-    # Web
-    "HTML": [
-        r"\bhtml\b"
-    ],
+    "HTML": [r"\bhtml\b"],
 
-    "CSS": [
-        r"\bcss\b"
-    ],
+    "CSS": [r"\bcss\b"],
 
     "React": [
         r"\breact(?:\.js)?\b"
     ],
 
-    "Flask": [
-        r"\bflask\b"
-    ],
+    "Flask": [r"\bflask\b"],
 
-    "Django": [
-        r"\bdjango\b"
-    ],
+    "Django": [r"\bdjango\b"],
 
     "REST API": [
         r"\brest\s*api\b",
@@ -80,25 +58,19 @@ SKILL_PATTERNS = {
         r"\brestful\b"
     ],
 
-    # Database
     "SQL": [
         r"(?<![a-z])sql(?![a-z])"
     ],
 
-    "MongoDB": [
-        r"\bmongodb\b"
-    ],
+    "MongoDB": [r"\bmongodb\b"],
 
-    "MySQL": [
-        r"\bmysql\b"
-    ],
+    "MySQL": [r"\bmysql\b"],
 
     "PostgreSQL": [
         r"\bpostgresql\b",
         r"\bpostgres\b"
     ],
 
-    # Data / ML
     "Machine Learning": [
         r"\bmachine\s+learning\b",
         r"\bml\s+fundamentals\b"
@@ -123,36 +95,23 @@ SKILL_PATTERNS = {
         r"\bdata\s+processing\b"
     ],
 
-    "Pandas": [
-        r"\bpandas\b"
-    ],
+    "Pandas": [r"\bpandas\b"],
 
-    "NumPy": [
-        r"\bnumpy\b"
-    ],
+    "NumPy": [r"\bnumpy\b"],
 
     "Scikit-learn": [
         r"\bscikit[-\s]?learn\b",
         r"\bsklearn\b"
     ],
 
-    "Matplotlib": [
-        r"\bmatplotlib\b"
-    ],
+    "Matplotlib": [r"\bmatplotlib\b"],
 
-    "Seaborn": [
-        r"\bseaborn\b"
-    ],
+    "Seaborn": [r"\bseaborn\b"],
 
-    "TensorFlow": [
-        r"\btensorflow\b"
-    ],
+    "TensorFlow": [r"\btensorflow\b"],
 
-    "PyTorch": [
-        r"\bpytorch\b"
-    ],
+    "PyTorch": [r"\bpytorch\b"],
 
-    # Core CS
     "Data Structures": [
         r"\bdata\s+structures?\b",
         r"\bdsa\b"
@@ -163,7 +122,6 @@ SKILL_PATTERNS = {
         r"\bdsa\b"
     ],
 
-    # Development tools
     "Git": [
         r"(?<![a-z])git(?!hub)"
     ],
@@ -180,7 +138,6 @@ SKILL_PATTERNS = {
         r"\blinux\b"
     ],
 
-    # Cloud
     "AWS": [
         r"\baws\b",
         r"\bamazon\s+web\s+services\b"
@@ -194,7 +151,6 @@ SKILL_PATTERNS = {
         r"\bgoogle\s+cloud\b"
     ],
 
-    # Other
     "Node.js": [
         r"\bnode\.?js\b",
         r"\bnodejs\b"
@@ -215,116 +171,69 @@ SKILL_PATTERNS = {
 # ============================================================
 
 SKILL_ALIASES = {
-
     "python": ["python"],
-
     "c": ["c"],
-
     "c++": ["c++"],
-
     "java": ["java"],
-
     "javascript": ["javascript"],
-
+    "html": ["html"],
+    "css": ["css"],
+    "react": ["react"],
     "sql": ["sql"],
-
     "mongodb": ["mongodb"],
-
     "mysql": ["mysql"],
-
-    "postgresql": [
-        "postgresql",
-        "postgres"
-    ],
-
-    "node.js": [
-        "node.js",
-        "nodejs"
-    ],
-
+    "postgresql": ["postgresql", "postgres"],
+    "node.js": ["node.js", "nodejs"],
     "flask": ["flask"],
-
     "django": ["django"],
-
-    "rest api": [
-        "rest api",
-        "restful api",
-        "restful"
-    ],
-
+    "rest api": ["rest api", "restful api", "restful"],
     "machine learning": [
         "machine learning",
         "ml fundamentals"
     ],
-
-    "deep learning": [
-        "deep learning"
-    ],
-
+    "deep learning": ["deep learning"],
     "data analysis": [
         "data analysis",
         "data analytics"
     ],
-
     "data science": [
         "data science",
         "ai & data science",
         "artificial intelligence and data science"
     ],
-
-    "data processing": [
-        "data processing"
-    ],
-
+    "data processing": ["data processing"],
     "pandas": ["pandas"],
-
     "numpy": ["numpy"],
-
     "scikit-learn": [
         "scikit-learn",
         "scikit learn",
         "sklearn"
     ],
-
     "matplotlib": ["matplotlib"],
-
     "seaborn": ["seaborn"],
-
     "tensorflow": ["tensorflow"],
-
     "pytorch": ["pytorch"],
-
     "data structures": [
         "data structures",
         "data structure",
         "dsa"
     ],
-
     "algorithms": [
         "algorithms",
         "algorithm",
         "dsa"
     ],
-
     "git": ["git"],
-
     "github": ["github"],
-
     "docker": ["docker"],
-
     "linux": ["linux"],
-
     "aws": [
         "aws",
         "amazon web services"
     ],
-
     "azure": ["azure"],
-
     "google cloud": ["google cloud"],
-
     "arduino": ["arduino"],
-
     "google workspace": [
         "google workspace"
     ],
@@ -332,82 +241,194 @@ SKILL_ALIASES = {
 
 
 # ============================================================
-# EXTRACT SKILLS FROM TEXT
+# SKILL EXTRACTION
 # ============================================================
 
 def extract_skills_from_text(text: str):
-    """
-    Detect technical skills directly from any text.
-    Used for both resumes and job descriptions.
-    """
+    """Detect supported technical skills from text."""
 
-    text = normalize_text(text)
-
+    normalized = normalize_text(text)
     found = []
 
     for skill, patterns in SKILL_PATTERNS.items():
-
-        for pattern in patterns:
-
-            if re.search(
-                pattern,
-                text,
-                re.IGNORECASE
-            ):
-                found.append(skill)
-                break
+        if _matches_any_pattern(normalized, patterns):
+            found.append(skill)
 
     return found
 
 
-# ============================================================
-# JOB SKILL EXTRACTION
-# ============================================================
+def _matches_any_pattern(text, patterns):
+    """Return True when any pattern matches."""
+
+    return any(
+        re.search(pattern, text, re.IGNORECASE)
+        for pattern in patterns
+    )
+
 
 def extract_job_keywords(job_description: str):
-    """
-    Extract all supported technical skills from the JD.
-    """
+    """Extract supported technical skills from a JD."""
 
-    return extract_skills_from_text(
-        job_description
+    return extract_skills_from_text(job_description)
+
+
+# ============================================================
+# JD SECTION EXTRACTION
+# ============================================================
+
+REQUIRED_SECTION_PATTERNS = [
+    r"required\s+skills?(.*?)(?="
+    r"preferred\s+skills?|"
+    r"nice\s+to\s+have|"
+    r"desired\s+skills?|"
+    r"bonus|"
+    r"qualifications?|"
+    r"$"
+    r")",
+
+    r"requirements?(.*?)(?="
+    r"preferred\s+skills?|"
+    r"nice\s+to\s+have|"
+    r"desired\s+skills?|"
+    r"bonus|"
+    r"$"
+    r")",
+]
+
+
+PREFERRED_SECTION_PATTERNS = [
+    r"preferred\s+skills?(.*?)(?="
+    r"required\s+skills?|"
+    r"requirements?|"
+    r"qualifications?|"
+    r"$"
+    r")",
+
+    r"nice\s+to\s+have(.*?)(?="
+    r"required\s+skills?|"
+    r"requirements?|"
+    r"$"
+    r")",
+
+    r"desired\s+skills?(.*?)(?="
+    r"required\s+skills?|"
+    r"requirements?|"
+    r"$"
+    r")",
+]
+
+
+def _extract_section(text, patterns):
+    """Extract the first matching JD section."""
+
+    for pattern in patterns:
+        match = re.search(
+            pattern,
+            text,
+            re.IGNORECASE | re.DOTALL
+        )
+
+        if match:
+            return match.group(1)
+
+    return ""
+
+
+def _get_skill_sections(job_description):
+    """Return required and preferred JD sections."""
+
+    text = normalize_text(job_description)
+
+    required = _extract_section(
+        text,
+        REQUIRED_SECTION_PATTERNS
     )
+
+    preferred = _extract_section(
+        text,
+        PREFERRED_SECTION_PATTERNS
+    )
+
+    return text, required, preferred
 
 
 # ============================================================
 # REQUIRED / PREFERRED CLASSIFICATION
 # ============================================================
+def _find_section(text, patterns):
+    """Return the first matching section from the job description."""
+    for pattern in patterns:
+        match = re.search(
+            pattern,
+            text,
+            re.IGNORECASE | re.DOTALL
+        )
 
-def classify_job_skills(
-    job_description,
-    job_skills
-):
-    """
-    Classify JD skills using section headings.
+        if match:
+            return match.group(1)
 
-    If the JD explicitly contains sections such as:
+    return ""
 
-        Required Skills
-        Preferred Skills
 
-    those sections are used directly.
+def _classify_skill_by_context(text, skill):
+    """Classify a skill using nearby contextual wording."""
 
-    Otherwise, contextual wording is used.
-    """
+    position = text.find(skill.lower())
 
-    text = normalize_text(
-        job_description
+    if position < 0:
+        return "general"
+
+    context_start = max(0, position - 120)
+    context_end = min(len(text), position + 180)
+
+    context = text[context_start:context_end]
+
+    required_words = [
+        "required",
+        "must have",
+        "mandatory",
+        "essential",
+        "must-have",
+    ]
+
+    preferred_words = [
+        "preferred",
+        "nice to have",
+        "nice-to-have",
+        "desired",
+        "bonus",
+        "plus",
+    ]
+
+    if any(word in context for word in required_words):
+        return "required"
+
+    if any(word in context for word in preferred_words):
+        return "preferred"
+
+    return "general"
+
+
+def _skill_in_section(skill, section):
+    """Check whether a skill appears in a section."""
+    patterns = SKILL_PATTERNS.get(skill, [])
+
+    return any(
+        re.search(
+            pattern,
+            section,
+            re.IGNORECASE
+        )
+        for pattern in patterns
     )
 
-    required_skills = []
-    preferred_skills = []
-    general_skills = []
 
-    # --------------------------------------------------------
-    # Find required section
-    # --------------------------------------------------------
+def classify_job_skills(job_description, job_skills):
+    """
+    Classify JD skills using explicit sections and contextual wording.
+    """
 
-    required_section = ""
+    text = normalize_text(job_description)
 
     required_patterns = [
         r"required\s+skills?(.*?)(?="
@@ -427,24 +448,6 @@ def classify_job_skills(
         r"$"
         r")",
     ]
-
-    for pattern in required_patterns:
-
-        match = re.search(
-            pattern,
-            text,
-            re.IGNORECASE | re.DOTALL
-        )
-
-        if match:
-            required_section = match.group(1)
-            break
-
-    # --------------------------------------------------------
-    # Find preferred section
-    # --------------------------------------------------------
-
-    preferred_section = ""
 
     preferred_patterns = [
         r"preferred\s+skills?(.*?)(?="
@@ -467,112 +470,47 @@ def classify_job_skills(
         r")",
     ]
 
-    for pattern in preferred_patterns:
+    required_section = _find_section(
+        text,
+        required_patterns
+    )
 
-        match = re.search(
-            pattern,
-            text,
-            re.IGNORECASE | re.DOTALL
-        )
+    preferred_section = _find_section(
+        text,
+        preferred_patterns
+    )
 
-        if match:
-            preferred_section = match.group(1)
-            break
-
-    # --------------------------------------------------------
-    # Classify each skill
-    # --------------------------------------------------------
+    required_skills = []
+    preferred_skills = []
+    general_skills = []
 
     for skill in job_skills:
 
-        skill_patterns = SKILL_PATTERNS.get(
+        if _skill_in_section(
             skill,
-            []
-        )
-
-        in_required = any(
-            re.search(
-                pattern,
-                required_section,
-                re.IGNORECASE
-            )
-            for pattern in skill_patterns
-        )
-
-        in_preferred = any(
-            re.search(
-                pattern,
-                preferred_section,
-                re.IGNORECASE
-            )
-            for pattern in skill_patterns
-        )
-
-        if in_required:
-
+            required_section
+        ):
             required_skills.append(skill)
 
-        elif in_preferred:
-
+        elif _skill_in_section(
+            skill,
+            preferred_section
+        ):
             preferred_skills.append(skill)
 
         else:
-
-            # Contextual fallback
-            skill_position = text.find(
-                skill.lower()
+            classification = _classify_skill_by_context(
+                text,
+                skill
             )
 
-            if skill_position >= 0:
+            if classification == "required":
+                required_skills.append(skill)
 
-                context_start = max(
-                    0,
-                    skill_position - 120
-                )
-
-                context_end = min(
-                    len(text),
-                    skill_position + 180
-                )
-
-                context = text[
-                    context_start:context_end
-                ]
-
-                required_words = [
-                    "required",
-                    "must have",
-                    "mandatory",
-                    "essential",
-                    "must-have",
-                ]
-
-                preferred_words = [
-                    "preferred",
-                    "nice to have",
-                    "nice-to-have",
-                    "desired",
-                    "bonus",
-                    "plus",
-                ]
-
-                if any(
-                    word in context
-                    for word in required_words
-                ):
-                    required_skills.append(skill)
-
-                elif any(
-                    word in context
-                    for word in preferred_words
-                ):
-                    preferred_skills.append(skill)
-
-                else:
-                    general_skills.append(skill)
+            elif classification == "preferred":
+                preferred_skills.append(skill)
 
             else:
-
                 general_skills.append(skill)
 
     return (
@@ -581,23 +519,123 @@ def classify_job_skills(
         general_skills
     )
 
-
-# ============================================================
-# CHECK WHETHER RESUME HAS A SKILL
-# ============================================================
-
-def resume_has_skill(
-    resume_skills,
-    skill
+def _classify_skill(
+    skill,
+    text,
+    required_section,
+    preferred_section
 ):
-    """
-    Check skill using exact normalized aliases.
-    """
+    """Classify one skill."""
 
-    resume_normalized = {
-        normalize_text(skill)
-        for skill in resume_skills
-        if skill
+    patterns = SKILL_PATTERNS.get(
+        skill,
+        []
+    )
+
+    if _matches_any_pattern(
+        required_section,
+        patterns
+    ):
+        return "required"
+
+    if _matches_any_pattern(
+        preferred_section,
+        patterns
+    ):
+        return "preferred"
+
+    return _classify_from_context(
+        skill,
+        text
+    )
+
+
+def _classify_from_context(skill, text):
+    """Classify a skill using nearby JD wording."""
+
+    position = text.find(
+        skill.lower()
+    )
+
+    if position < 0:
+        return "general"
+
+    context = _get_skill_context(
+        text,
+        position
+    )
+
+    if _contains_required_word(context):
+        return "required"
+
+    if _contains_preferred_word(context):
+        return "preferred"
+
+    return "general"
+
+
+def _get_skill_context(text, position):
+    """Get text surrounding a skill occurrence."""
+
+    start = max(
+        0,
+        position - 120
+    )
+
+    end = min(
+        len(text),
+        position + 180
+    )
+
+    return text[start:end]
+
+
+def _contains_required_word(context):
+    """Check for required-skill wording."""
+
+    words = [
+        "required",
+        "must have",
+        "mandatory",
+        "essential",
+        "must-have",
+    ]
+
+    return any(
+        word in context
+        for word in words
+    )
+
+
+def _contains_preferred_word(context):
+    """Check for preferred-skill wording."""
+
+    words = [
+        "preferred",
+        "nice to have",
+        "nice-to-have",
+        "desired",
+        "bonus",
+        "plus",
+    ]
+
+    return any(
+        word in context
+        for word in words
+    )
+
+
+# ============================================================
+# RESUME SKILL MATCHING
+# ============================================================
+
+def resume_has_skill(resume_skills, skill):
+    """Check whether a resume contains a skill."""
+
+    normalized = {
+        normalize_text(item)
+        for item in resume_skills
+        if item
     }
 
     aliases = SKILL_ALIASES.get(
@@ -605,17 +643,27 @@ def resume_has_skill(
         [skill.lower()]
     )
 
-    for alias in aliases:
-
-        if normalize_text(alias) in resume_normalized:
-            return True
-
-    return False
+    return any(
+        normalize_text(alias) in normalized
+        for alias in aliases
+    )
 
 
-# ============================================================
-# SKILL MATCH
-# ============================================================
+def _skill_weight(
+    skill,
+    required_skills,
+    preferred_skills
+):
+    """Return the matching weight for a skill."""
+
+    if skill in required_skills:
+        return 2.0
+
+    if skill in preferred_skills:
+        return 0.75
+
+    return 1.0
+
 
 def calculate_skill_match(
     resume_skills,
@@ -624,21 +672,10 @@ def calculate_skill_match(
     required_skills,
     preferred_skills
 ):
-    """
-    Calculate weighted technical skill match.
-
-    Required skills = highest weight
-    Preferred skills = medium weight
-    General skills = normal weight
-    """
+    """Calculate weighted technical skill match."""
 
     if not job_skills:
-
-        return (
-            0.0,
-            [],
-            []
-        )
+        return 0.0, [], []
 
     matched = []
     missing = []
@@ -647,19 +684,11 @@ def calculate_skill_match(
     matched_weight = 0.0
 
     for skill in job_skills:
-
-        # Weight
-        if skill in required_skills:
-
-            weight = 2.0
-
-        elif skill in preferred_skills:
-
-            weight = 0.75
-
-        else:
-
-            weight = 1.0
+        weight = _skill_weight(
+            skill,
+            required_skills,
+            preferred_skills
+        )
 
         total_weight += weight
 
@@ -667,25 +696,15 @@ def calculate_skill_match(
             resume_skills,
             skill
         ):
-
             matched.append(skill)
             matched_weight += weight
-
         else:
-
             missing.append(skill)
 
-    if total_weight == 0:
-
-        percentage = 0.0
-
-    else:
-
-        percentage = (
-            matched_weight
-            / total_weight
-            * 100
-        )
+    percentage = _calculate_percentage(
+        matched_weight,
+        total_weight
+    )
 
     return (
         percentage,
@@ -694,99 +713,94 @@ def calculate_skill_match(
     )
 
 
+def _calculate_percentage(value, total):
+    """Calculate a percentage safely."""
+
+    if total == 0:
+        return 0.0
+
+    return value / total * 100
+
+
 # ============================================================
 # KEYWORD MATCH
 # ============================================================
+
+KEYWORD_STOP_WORDS = {
+    "the",
+    "and",
+    "for",
+    "with",
+    "from",
+    "that",
+    "this",
+    "are",
+    "you",
+    "your",
+    "our",
+    "will",
+    "have",
+    "has",
+    "not",
+    "but",
+    "all",
+    "any",
+    "can",
+    "who",
+    "their",
+    "they",
+    "job",
+    "role",
+    "work",
+    "using",
+    "use",
+    "into",
+    "about",
+    "also",
+    "should",
+    "must",
+    "would",
+    "years",
+    "year",
+    "experience",
+}
+
+
+def _extract_keywords(text):
+    """Extract meaningful words from text."""
+
+    words = set(
+        re.findall(
+            r"\b[a-z][a-z0-9+#.-]{2,}\b",
+            normalize_text(text)
+        )
+    )
+
+    return words - KEYWORD_STOP_WORDS
+
 
 def calculate_keyword_match(
     resume_text,
     job_description
 ):
-    """
-    Calculate meaningful keyword overlap.
+    """Calculate meaningful keyword overlap."""
 
-    Common stop words are removed so the score reflects
-    technical/job-related terminology rather than words like
-    'and', 'the', 'with', etc.
-    """
-
-    resume_text = normalize_text(
+    resume_words = _extract_keywords(
         resume_text
     )
 
-    job_text = normalize_text(
+    job_words = _extract_keywords(
         job_description
     )
 
-    stop_words = {
-        "the",
-        "and",
-        "for",
-        "with",
-        "from",
-        "that",
-        "this",
-        "are",
-        "you",
-        "your",
-        "our",
-        "will",
-        "have",
-        "has",
-        "not",
-        "but",
-        "all",
-        "any",
-        "can",
-        "who",
-        "their",
-        "they",
-        "job",
-        "role",
-        "work",
-        "using",
-        "use",
-        "into",
-        "about",
-        "also",
-        "should",
-        "must",
-        "would",
-        "years",
-        "year",
-        "experience",
-    }
-
-    resume_words = set(
-        re.findall(
-            r"\b[a-z][a-z0-9+#.-]{2,}\b",
-            resume_text
-        )
-    )
-
-    job_words = set(
-        re.findall(
-            r"\b[a-z][a-z0-9+#.-]{2,}\b",
-            job_text
-        )
-    )
-
-    resume_words -= stop_words
-    job_words -= stop_words
-
     if not job_words:
-
         return 0.0
 
-    matched_words = (
-        resume_words
-        & job_words
-    )
+    matched = resume_words & job_words
 
-    return (
-        len(matched_words)
-        / len(job_words)
-        * 100
+    return _calculate_percentage(
+        len(matched),
+        len(job_words)
     )
 
 
@@ -794,119 +808,104 @@ def calculate_keyword_match(
 # PROJECT RELEVANCE
 # ============================================================
 
+PROJECT_CONCEPT_GROUPS = {
+
+    "machine learning": [
+        "machine learning",
+        "ml",
+        "classification",
+        "regression",
+        "prediction",
+        "similarity",
+    ],
+
+    "data analysis": [
+        "data analysis",
+        "data analytics",
+        "data preprocessing",
+        "data visualization",
+        "dataset",
+        "insights",
+    ],
+
+    "python": [
+        "python"
+    ],
+
+    "software development": [
+        "software",
+        "application",
+        "development",
+        "system",
+    ],
+
+    "data science": [
+        "data science",
+        "data preprocessing",
+        "data analysis",
+    ],
+
+    "sql": [
+        "sql",
+        "database"
+    ],
+
+    "automation": [
+        "automation",
+        "arduino",
+        "sensor",
+        "control system",
+    ],
+
+    "web development": [
+        "web",
+        "flask",
+        "django",
+        "api",
+        "application",
+    ],
+}
+
+
 def calculate_project_relevance(
     projects,
     job_description
 ):
-    """
-    Calculate how strongly the candidate's projects
-    relate to the job description.
-    """
+    """Calculate project relevance to the target JD."""
 
-    project_text = normalize_text(
-        projects
-    )
-
-    job_text = normalize_text(
-        job_description
-    )
+    project_text = normalize_text(projects)
+    job_text = normalize_text(job_description)
 
     if not project_text:
-
         return 0.0
 
-    concept_groups = {
+    relevant = 0
+    matched = 0
 
-        "machine learning": [
-            "machine learning",
-            "ml",
-            "classification",
-            "regression",
-            "prediction",
-            "similarity",
-        ],
-
-        "data analysis": [
-            "data analysis",
-            "data analytics",
-            "data preprocessing",
-            "data visualization",
-            "dataset",
-            "insights",
-        ],
-
-        "python": [
-            "python"
-        ],
-
-        "software development": [
-            "software",
-            "application",
-            "development",
-            "system",
-        ],
-
-        "data science": [
-            "data science",
-            "data preprocessing",
-            "data analysis",
-        ],
-
-        "sql": [
-            "sql",
-            "database"
-        ],
-
-        "automation": [
-            "automation",
-            "arduino",
-            "sensor",
-            "control system",
-        ],
-
-        "web development": [
-            "web",
-            "flask",
-            "django",
-            "api",
-            "application",
-        ],
-    }
-
-    relevant_groups = 0
-    matched_groups = 0
-
-    for keywords in concept_groups.values():
-
-        job_requires_group = any(
-            keyword in job_text
-            for keyword in keywords
-        )
-
-        if not job_requires_group:
+    for keywords in PROJECT_CONCEPT_GROUPS.values():
+        if not _contains_any(job_text, keywords):
             continue
 
-        relevant_groups += 1
+        relevant += 1
 
-        project_matches_group = any(
-            keyword in project_text
-            for keyword in keywords
-        )
+        if _contains_any(project_text, keywords):
+            matched += 1
 
-        if project_matches_group:
-
-            matched_groups += 1
-
-    if relevant_groups == 0:
-
-        # If the JD has no recognizable concept,
-        # give a neutral score instead of zero.
+    if relevant == 0:
         return 50.0
 
-    return (
-        matched_groups
-        / relevant_groups
-        * 100
+    return _calculate_percentage(
+        matched,
+        relevant
+    )
+
+
+def _contains_any(text, keywords):
+    """Check whether text contains any keyword."""
+
+    return any(
+        keyword in text
+        for keyword in keywords
     )
 
 
@@ -914,14 +913,22 @@ def calculate_project_relevance(
 # EDUCATION MATCH
 # ============================================================
 
+EDUCATION_TERMS = [
+    "computer science",
+    "artificial intelligence",
+    "data science",
+    "information technology",
+    "software engineering",
+    "computer engineering",
+    "cse",
+]
+
+
 def calculate_education_match(
     education,
     job_description
 ):
-    """
-    Determine how well the candidate's education
-    matches the role.
-    """
+    """Calculate education alignment."""
 
     education_text = normalize_text(
         education
@@ -932,55 +939,151 @@ def calculate_education_match(
     )
 
     if not education_text:
-
         return 30.0
 
-    relevant_terms = [
-
-        "computer science",
-
-        "artificial intelligence",
-
-        "data science",
-
-        "information technology",
-
-        "software engineering",
-
-        "computer engineering",
-
-        "cse",
-    ]
-
-    matches = 0
-
-    for term in relevant_terms:
-
-        if term in education_text:
-
-            if (
-                term in job_text
-                or term in {
-                    "computer science",
-                    "computer engineering",
-                    "cse",
-                }
-            ):
-
-                matches += 1
+    matches = _count_education_matches(
+        education_text,
+        job_text
+    )
 
     if matches > 0:
-
         return 100.0
 
-    if (
-        "computer" in education_text
-        or "engineering" in education_text
+    if _contains_computer_background(
+        education_text
     ):
-
         return 70.0
 
     return 30.0
+
+
+def _count_education_matches(
+    education_text,
+    job_text
+):
+    """Count relevant education terms."""
+
+    matches = 0
+
+    for term in EDUCATION_TERMS:
+        if term not in education_text:
+            continue
+
+        if term in job_text:
+            matches += 1
+            continue
+
+        if term in {
+            "computer science",
+            "computer engineering",
+            "cse",
+        }:
+            matches += 1
+
+    return matches
+
+
+def _contains_computer_background(text):
+    """Check for general computing education."""
+
+    return (
+        "computer" in text
+        or "engineering" in text
+    )
+
+
+# ============================================================
+# ATS SCORE COMPONENTS
+# ============================================================
+
+def _calculate_skill_component(
+    resume_data,
+    job_description
+):
+    """Calculate skill-related ATS data."""
+
+    job_skills = extract_job_keywords(
+        job_description
+    )
+
+    required, preferred, general = (
+        classify_job_skills(
+            job_description,
+            job_skills
+        )
+    )
+
+    percentage, matched, missing = (
+        calculate_skill_match(
+            resume_data.get("skills", []),
+            job_skills,
+            job_description,
+            required,
+            preferred
+        )
+    )
+
+    return {
+        "job_skills": job_skills,
+        "required_skills": required,
+        "preferred_skills": preferred,
+        "general_skills": general,
+        "matched_skills": matched,
+        "missing_skills": missing,
+        "skill_match": round(
+            percentage,
+            2
+        ),
+    }
+
+
+def _calculate_other_components(
+    resume_data,
+    resume_text,
+    job_description
+):
+    """Calculate non-skill ATS components."""
+
+    keyword = calculate_keyword_match(
+        resume_text,
+        job_description
+    )
+
+    project = calculate_project_relevance(
+        resume_data.get("projects", ""),
+        job_description
+    )
+
+    education = calculate_education_match(
+        resume_data.get("education", ""),
+        job_description
+    )
+
+    return {
+        "keyword_match": round(
+            keyword,
+            2
+        ),
+        "project_relevance": round(
+            project,
+            2
+        ),
+        "education_match": round(
+            education,
+            2
+        ),
+    }
+
+
+def _calculate_final_score(components):
+    """Calculate final weighted ATS score."""
+
+    return (
+        components["skill_match"] * 0.40
+        + components["keyword_match"] * 0.25
+        + components["project_relevance"] * 0.20
+        + components["education_match"] * 0.15
+    )
 
 
 # ============================================================
@@ -992,138 +1095,31 @@ def calculate_ats_score(
     resume_text,
     job_description
 ):
-    """
-    Calculate the complete ATS score.
-    """
+    """Calculate the complete ATS score."""
 
-    # --------------------------------------------------------
-    # Job skills
-    # --------------------------------------------------------
-
-    job_skills = extract_job_keywords(
+    skill_data = _calculate_skill_component(
+        resume_data,
         job_description
     )
 
-    (
-        required_skills,
-        preferred_skills,
-        general_skills
-    ) = classify_job_skills(
-        job_description,
-        job_skills
+    other_data = _calculate_other_components(
+        resume_data,
+        resume_text,
+        job_description
     )
 
-    # --------------------------------------------------------
-    # Skill matching
-    # --------------------------------------------------------
+    components = {
+        **skill_data,
+        **other_data,
+    }
 
-    (
-        skill_percentage,
-        matched_skills,
-        missing_skills
-    ) = calculate_skill_match(
-        resume_data.get(
-            "skills",
-            []
-        ),
-        job_skills,
-        job_description,
-        required_skills,
-        preferred_skills
-    )
-
-    # --------------------------------------------------------
-    # Keyword matching
-    # --------------------------------------------------------
-
-    keyword_percentage = (
-        calculate_keyword_match(
-            resume_text,
-            job_description
-        )
-    )
-
-    # --------------------------------------------------------
-    # Project relevance
-    # --------------------------------------------------------
-
-    project_percentage = (
-        calculate_project_relevance(
-            resume_data.get(
-                "projects",
-                ""
-            ),
-            job_description
-        )
-    )
-
-    # --------------------------------------------------------
-    # Education
-    # --------------------------------------------------------
-
-    education_percentage = (
-        calculate_education_match(
-            resume_data.get(
-                "education",
-                ""
-            ),
-            job_description
-        )
-    )
-
-    # --------------------------------------------------------
-    # Final weighted score
-    # --------------------------------------------------------
-
-    score = (
-
-        skill_percentage * 0.40
-
-        + keyword_percentage * 0.25
-
-        + project_percentage * 0.20
-
-        + education_percentage * 0.15
+    score = _calculate_final_score(
+        components
     )
 
     return {
-
-        "score": round(
-            score,
-            2
-        ),
-
-        "job_skills": job_skills,
-
-        "required_skills": required_skills,
-
-        "preferred_skills": preferred_skills,
-
-        "general_skills": general_skills,
-
-        "matched_skills": matched_skills,
-
-        "missing_skills": missing_skills,
-
-        "skill_match": round(
-            skill_percentage,
-            2
-        ),
-
-        "keyword_match": round(
-            keyword_percentage,
-            2
-        ),
-
-        "project_relevance": round(
-            project_percentage,
-            2
-        ),
-
-        "education_match": round(
-            education_percentage,
-            2
-        ),
+        "score": round(score, 2),
+        **components,
     }
 
 
@@ -1131,148 +1127,166 @@ def calculate_ats_score(
 # ATS RECOMMENDATIONS
 # ============================================================
 
-def generate_recommendations(
-    resume_data,
-    ats_result
-):
-    """
-    Generate useful recommendations based on
-    actual ATS results.
-    """
+def _missing_skill_recommendation(ats_result):
+    """Generate missing-skill recommendation."""
 
-    recommendations = []
-
-    missing_skills = ats_result.get(
+    missing = ats_result.get(
         "missing_skills",
         []
     )
 
-    # --------------------------------------------------------
-    # Missing skills
-    # --------------------------------------------------------
+    if not missing:
+        return None
 
-    if missing_skills:
+    required = ats_result.get(
+        "required_skills",
+        []
+    )
 
-        high_priority = []
+    priority = []
 
-        # Required missing skills first
-        required = ats_result.get(
-            "required_skills",
-            []
-        )
+    for skill in required:
+        if skill in missing:
+            priority.append(skill)
 
-        for skill in required:
+    for skill in missing:
+        if skill not in priority:
+            priority.append(skill)
 
-            if skill in missing_skills:
-                high_priority.append(skill)
+        if len(priority) >= 5:
+            break
 
-        # Then preferred/general
-        for skill in missing_skills:
+    return (
+        "Consider adding these missing skills "
+        "if you genuinely have experience with them: "
+        + ", ".join(priority[:5])
+        + "."
+    )
 
-            if (
-                skill not in high_priority
-                and len(high_priority) < 5
-            ):
-                high_priority.append(skill)
 
-        high_priority = high_priority[:5]
+def _skill_score_recommendation(ats_result):
+    """Generate skill-score recommendation."""
 
-        recommendations.append(
-            "Consider adding these missing skills "
-            "if you genuinely have experience with them: "
-            + ", ".join(high_priority)
-            + "."
-        )
-
-    # --------------------------------------------------------
-    # Skill score
-    # --------------------------------------------------------
-
-    skill_match = ats_result.get(
+    score = ats_result.get(
         "skill_match",
         0
     )
 
-    if skill_match < 60:
+    if score >= 60:
+        return None
 
-        recommendations.append(
-            "Your technical skill match is below 60%. "
-            "Tailor the resume to the specific job description."
-        )
+    return (
+        "Your technical skill match is below 60%. "
+        "Tailor the resume to the specific job description."
+    )
 
-    # --------------------------------------------------------
-    # Keyword score
-    # --------------------------------------------------------
 
-    keyword_match = ats_result.get(
+def _keyword_score_recommendation(ats_result):
+    """Generate keyword-score recommendation."""
+
+    score = ats_result.get(
         "keyword_match",
         0
     )
 
-    if keyword_match < 50:
+    if score >= 50:
+        return None
 
-        recommendations.append(
-            "Your resume has relatively low keyword overlap "
-            "with the job description. Use relevant terminology "
-            "from the job description where it truthfully "
-            "describes your experience."
-        )
+    return (
+        "Your resume has relatively low keyword overlap "
+        "with the job description. Use relevant terminology "
+        "from the job description where it truthfully "
+        "describes your experience."
+    )
 
-    # --------------------------------------------------------
-    # Projects
-    # --------------------------------------------------------
 
-    project_relevance = ats_result.get(
+def _project_recommendation(ats_result):
+    """Generate project relevance recommendation."""
+
+    score = ats_result.get(
         "project_relevance",
         0
     )
 
-    if project_relevance >= 70:
-
-        recommendations.append(
+    if score >= 70:
+        return (
             "Your projects are strongly relevant to this role. "
             "Highlight the most relevant project near the top "
             "of your resume."
         )
 
-    else:
+    return (
+        "Add or emphasize projects that directly relate "
+        "to the target role."
+    )
 
-        recommendations.append(
-            "Add or emphasize projects that directly relate "
-            "to the target role."
-        )
 
-    # --------------------------------------------------------
-    # Education
-    # --------------------------------------------------------
+def _education_recommendation(ats_result):
+    """Generate education recommendation."""
 
-    education_match = ats_result.get(
+    score = ats_result.get(
         "education_match",
         0
     )
 
-    if education_match >= 80:
+    if score < 80:
+        return None
 
-        recommendations.append(
-            "Your educational background is well aligned "
-            "with this role."
-        )
+    return (
+        "Your educational background is well aligned "
+        "with this role."
+    )
 
-    # --------------------------------------------------------
-    # Project metrics
-    # --------------------------------------------------------
+
+def _project_metrics_recommendation(resume_data):
+    """Generate project metrics recommendation."""
 
     projects = resume_data.get(
         "projects",
         ""
     )
 
-    if projects:
+    if not projects:
+        return None
 
-        recommendations.append(
-            "Add measurable outcomes to project descriptions "
-            "where possible, such as accuracy, performance "
-            "improvement, dataset size, or processing time."
+    return (
+        "Add measurable outcomes to project descriptions "
+        "where possible, such as accuracy, performance "
+        "improvement, dataset size, or processing time."
+    )
+
+
+def generate_recommendations(
+    resume_data,
+    ats_result
+):
+    """Generate recommendations from ATS results."""
+
+    recommendations = []
+
+    recommendation_functions = [
+        _missing_skill_recommendation,
+        _skill_score_recommendation,
+        _keyword_score_recommendation,
+        _project_recommendation,
+        _education_recommendation,
+    ]
+
+    for function in recommendation_functions:
+        recommendation = function(
+            ats_result
         )
+
+        if recommendation:
+            recommendations.append(
+                recommendation
+            )
+
+    metrics = _project_metrics_recommendation(
+        resume_data
+    )
+
+    if metrics:
+        recommendations.append(metrics)
 
     return recommendations
