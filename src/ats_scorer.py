@@ -422,11 +422,8 @@ def _skill_in_section(skill, section):
         for pattern in patterns
     )
 
-
 def classify_job_skills(job_description, job_skills):
-    """
-    Classify JD skills using explicit sections and contextual wording.
-    """
+    """Classify JD skills using sections and contextual wording."""
 
     text = normalize_text(job_description)
 
@@ -437,16 +434,13 @@ def classify_job_skills(job_description, job_skills):
         r"desired\s+skills?|"
         r"bonus|"
         r"qualifications?|"
-        r"$"
-        r")",
-
+        r"$)",
         r"requirements?(.*?)(?="
         r"preferred\s+skills?|"
         r"nice\s+to\s+have|"
         r"desired\s+skills?|"
         r"bonus|"
-        r"$"
-        r")",
+        r"$)",
     ]
 
     preferred_patterns = [
@@ -454,20 +448,15 @@ def classify_job_skills(job_description, job_skills):
         r"required\s+skills?|"
         r"requirements?|"
         r"qualifications?|"
-        r"$"
-        r")",
-
+        r"$)",
         r"nice\s+to\s+have(.*?)(?="
         r"required\s+skills?|"
         r"requirements?|"
-        r"$"
-        r")",
-
+        r"$)",
         r"desired\s+skills?(.*?)(?="
         r"required\s+skills?|"
         r"requirements?|"
-        r"$"
-        r")",
+        r"$)",
     ]
 
     required_section = _find_section(
@@ -480,44 +469,33 @@ def classify_job_skills(job_description, job_skills):
         preferred_patterns
     )
 
-    required_skills = []
-    preferred_skills = []
-    general_skills = []
+    categories = {
+        "required": [],
+        "preferred": [],
+        "general": [],
+    }
 
     for skill in job_skills:
+        if _skill_in_section(skill, required_section):
+            category = "required"
 
-        if _skill_in_section(
-            skill,
-            required_section
-        ):
-            required_skills.append(skill)
-
-        elif _skill_in_section(
-            skill,
-            preferred_section
-        ):
-            preferred_skills.append(skill)
+        elif _skill_in_section(skill, preferred_section):
+            category = "preferred"
 
         else:
-            classification = _classify_skill_by_context(
+            category = _classify_skill_by_context(
                 text,
                 skill
             )
 
-            if classification == "required":
-                required_skills.append(skill)
-
-            elif classification == "preferred":
-                preferred_skills.append(skill)
-
-            else:
-                general_skills.append(skill)
+        categories[category].append(skill)
 
     return (
-        required_skills,
-        preferred_skills,
-        general_skills
+        categories["required"],
+        categories["preferred"],
+        categories["general"],
     )
+
 
 def _classify_skill(
     skill,
