@@ -67,61 +67,38 @@ def process_resume(resume_path, job_description):
 
 @app.route("/analyze", methods=["POST"])
 def analyze():
-
     resume = request.files.get("resume")
-
-    job_description = request.form.get(
-        "job_description",
-        ""
-    ).strip()
+    job_description = request.form.get("job_description", "").strip()
 
     if not resume or not resume.filename:
         return "Please upload a resume.", 400
-
     if not job_description:
         return "Please enter a job description.", 400
 
     filename = Path(resume.filename).name
-
-    allowed_extensions = {
-        ".pdf",
-        ".docx",
-    }
-
     extension = Path(filename).suffix.lower()
 
-    if extension not in allowed_extensions:
-        return (
-            "Only PDF and DOCX resumes are supported.",
-            400,
-        )
+    if extension not in {".pdf", ".docx"}:
+        return "Only PDF and DOCX resumes are supported.", 400
 
     resume_path = UPLOAD_FOLDER / filename
-
     resume.save(resume_path)
 
     try:
-        (
-            resume_data,
-            result,
-            recommendations,
-        ) = process_resume(
+        resume_data, result, recommendations = process_resume(
             resume_path,
             job_description,
         )
-
         return render_template(
             "results.html",
             resume=resume_data,
             result=result,
             recommendations=recommendations,
         )
-
     except Exception as e:
-        return (
-            f"Error analyzing resume: {e}",
-            500,
-        )
+        return f"Error analyzing resume: {e}", 500
+
+
 
 
 if __name__ == "__main__":
