@@ -245,6 +245,7 @@ def extract_skills(text: str):
 
 
 def extract_resume_data(text: str):
+    """Extract structured information from resume text."""
 
     sections = [
         "OBJECTIVE",
@@ -257,41 +258,29 @@ def extract_resume_data(text: str):
         "DECLARATION",
     ]
 
-    return {
-
-        "name": extract_name(text),
-
-        "email": extract_email(text),
-
-        "phone": extract_phone(text),
-
-        "linkedin": extract_linkedin(text),
-
-        "cgpa": extract_cgpa(text),
-
-        "skills": extract_skills(text),
-
-        "education": extract_section(
+    section_data = {
+        name.lower(): extract_section(
             text,
+            name,
+            sections
+        )
+        for name in [
             "EDUCATION",
-            sections
-        ),
-
-        "projects": extract_section(
-            text,
             "PROJECTS",
-            sections
-        ),
-
-        "certifications": extract_section(
-            text,
             "CERTIFICATIONS",
-            sections
-        ),
-
-        "objective": extract_section(
-            text,
             "OBJECTIVE",
-            sections
-        ),
+        ]
+    }
+
+    return {
+        "name": extract_name(text),
+        "email": extract_email(text),
+        "phone": extract_phone(text),
+        "linkedin": extract_linkedin(text),
+        "cgpa": extract_cgpa(text),
+        "skills": extract_skills(text),
+        "education": section_data["education"],
+        "projects": section_data["projects"],
+        "certifications": section_data["certifications"],
+        "objective": section_data["objective"],
     }
